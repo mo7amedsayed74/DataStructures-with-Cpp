@@ -1,3 +1,5 @@
+//  {<<{ another way }>>}  ( https://ideone.com/BvOLzv )
+
 #include<iostream>
 #pragma once
 using namespace std;
