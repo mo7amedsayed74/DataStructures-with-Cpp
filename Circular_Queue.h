@@ -9,7 +9,7 @@ private:
     t arr[MAX];
 public:
     CircularQueue():front(-1),rear(-1){}
-    bool is_full(){return (front==-1&&rear==MAX-1)||(front=rear+1);}
+    bool is_full(){return (front==0&&rear==MAX-1)||(front=rear+1);}
     bool is_empty(){return front==-1&&rear==-1;}
     void insert(t element){
         if(is_full()){cout<<"overflow"; return;}
