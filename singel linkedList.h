@@ -1,8 +1,7 @@
 //linked list
 //Advantages    ( Dynamic size  -  ease of insertion/deletion )
 //disAdvantages (random access isn’t allowed - extra memory space is required for pointer to each element )
-#include<iostream>
-using namespace std;
+
 struct node {
     int value;
     node *next;
