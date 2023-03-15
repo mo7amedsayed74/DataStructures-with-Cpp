@@ -1,7 +1,3 @@
-#include<iostream>
-
-#pragma once
-using namespace std;
 
 template<class t> // allow me to use array for all data type
 class Array {
