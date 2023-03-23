@@ -38,6 +38,10 @@ public:
     }
 
     t pop() { // to get top then remove it
+        if (isEmpty()) {
+            cout << "error! your stack is empty\n";
+            return -1;
+        }
         t value = top->data;
         node<t> *tmp = top;
         top = top->next;
@@ -75,6 +79,10 @@ public:
     }
 
     void display() {
+        if (isEmpty()) {
+            cout << "sorry, queue is empty\n";
+            return;
+        }
         node<t> *tmp = top;
         while (tmp != NULL) {
             cout << tmp->data << " ";
