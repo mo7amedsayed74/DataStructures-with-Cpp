@@ -49,6 +49,15 @@ public:
         return value;
     }
 
+    void Pop() { // to remove top without save it in variable
+        if (isEmpty()) {
+            cout << "error! your stack is empty\n";
+            return ;
+        }
+        node<t> *tmp = top;
+        top = top->next;
+        delete tmp;
+    }
     t peek() { // to get top without remove it
         return top->data;
     }
@@ -80,7 +89,7 @@ public:
 
     void display() {
         if (isEmpty()) {
-            cout << "sorry, queue is empty\n";
+            cout << "sorry, stack is empty\n";
             return;
         }
         node<t> *tmp = top;
