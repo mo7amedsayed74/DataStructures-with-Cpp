@@ -3,9 +3,9 @@
 using namespace std;
 
 bool notPair(char open, char close) {
-    if ((open == '(' && close == ')') || (open == '{' && close == '}') || (open == '[' && close == ']'))
-        return false;
-    else return true;
+    if ((open == '(' && close != ')') || (open == '{' && close != '}') || (open == '[' && close != ']'))
+        return true;
+    else return false;
 }
 
 bool BalancedParenthesesUsingStack(string exp) { //   {(3+5)*9} true  ,  (3+5)*9} false
