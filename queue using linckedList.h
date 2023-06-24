@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 template<class t>
@@ -8,13 +9,16 @@ struct node {
 };
 
 template<class t>
-class Cqueue {
-    node<t> *head;
+class linkedQueue {
+    node<t> *head, *tail;
+    int length;
 public:
-    Cqueue() : head(NULL) {}
+    linkedQueue() : head(NULL), tail(NULL), length(0) {}
+
 
     bool isEmpty() {
-        return head == NULL;
+        // return length==0;
+        return head == NULL || tail == NULL;
     }
 
     bool isFull() {
@@ -23,49 +27,69 @@ public:
             cout << "your queue is full\n";
             return true;
         }
+        delete newNode;
         return false;
     }
+
+    int getLength() { return length; }
 
     void insert(t value) {
         node<t> *newNode = new node<t>;
         newNode->data = value;
         newNode->next = NULL;
         if (isEmpty()) {
-            head = newNode;
+            head = tail = newNode;
         } else {
-            node<t> *tmp = head;
-            while (tmp->next != NULL) {
-                tmp = tmp->next;
-            }
-            tmp->next = newNode;
+            tail->next = newNode;
+            tail = newNode;
         }
+        length++;
     }
 
     void Dequeue() { // to remove top element
-        if (isEmpty())
-            cout << "error! your queue is empty\n";
 
-        node<t> *tmp = head;
-        head = head->next;
-        delete tmp;
+        assert(!isEmpty()); // if queue is empty , this function stop the program and give me the line number of error
+        if (length == 1) {
+            delete head;
+            head = tail = NULL;
+            length = 0;
+        } else {
+            node<t> *tmp = head;
+            head = head->next;
+            delete tmp;
+            length--;
+        }
     }
 
     t pop() { // to get top then remove it
-        if (isEmpty())
-            cout << "error! your queue is empty\n";
 
+        assert(!isEmpty()); // if queue is empty , this function stop the program and give me the line number of error
         t value = head->data;
-        node<t> *tmp = head;
-        head = head->next;
-        delete tmp;
-        return value;
+        if (length == 1) {
+            delete head;
+            head = tail = NULL;
+            length = 0;
+            return value;
+        } else {
+            node<t> *tmp = head;
+            head = head->next;
+            delete tmp;
+            length--;
+            return value;
+        }
     }
 
-    t showTop() { // to get top without remove it
+    t showTop() { /// to get top without remove it
+        assert(!isEmpty()); // if queue is empty , this function stop the program and give me the line number of error
         return head->data;
     }
 
-    int count() {
+    void showTop(t &element) { /// to get top without remove it
+        assert(!isEmpty()); // if queue is empty , this function stop the program and give me the line number of error
+        element = head->data;
+    }
+
+    int count() { // (or) int count(){return length;}  , int count(){return getLength();}
         int counter = 0;
         node<t> *tmp = head;
         while (tmp != NULL) {
@@ -97,8 +121,8 @@ public:
     }
 
     void display() {
-        if(isEmpty()){
-            cout<<"sorry, queue is empty\n";
+        if (isEmpty()) {
+            cout << "sorry, queue is empty\n";
             return;
         }
         node<t> *tmp = head;
