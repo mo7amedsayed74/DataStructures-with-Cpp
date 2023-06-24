@@ -31,6 +31,14 @@ public:
             else front++;
         }
     }
+    t getFront(){
+        assert(!is_empty()); // if queue is empty , this function stop the program and give me the line number of error
+        return arr[front];
+    }
+    t getRear(){
+        assert(!is_empty()); // if queue is empty , this function stop the program and give me the line number of error
+        return arr[rear];
+    }
     void display();
 };
 template<class t>
